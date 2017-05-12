@@ -15,7 +15,6 @@ function ensureAuth(req, res, next) {
             return res.status(401).send({message: 'El token a expirado'});
         }
     } catch(ex) {
-        console.log(ex);
         return res.status(404).send({message: 'Token no valido'});
     }
     req.user = payload;
