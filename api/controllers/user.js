@@ -23,7 +23,7 @@ function saveUser(req, res) {
     if(params.password) {
         bcrypt.hash(params.password, null, null, (err, hash) =>{
             user.password = hash;
-            if (user.name != null && user.surname != null && user.email != null) {
+            if (user.name && user.surname && user.email) {
                 user.save((err, userStored) => {
                     if (err) {
                         res.status(500).send({message: 'Error al guardar al usuario'});
@@ -48,7 +48,7 @@ function saveUser(req, res) {
 function loginUser(req, res) {
     var params = req.body;
 
-    var email = params.email; //.toLowerCase();
+    var email = params.email.toLowerCase();
     var password = params.password;
 
     User.findOne({email: email}, (err, user) => {
